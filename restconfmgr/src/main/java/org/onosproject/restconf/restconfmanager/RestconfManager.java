@@ -368,53 +368,13 @@ public class RestconfManager implements RestconfService {
         }
     }
 
-    // private YdtBuilder getYdtBuilder(YmsOperationType ymsOperationType) {
-    //     return ymsService.getYdtBuilder(RESTCONF_ROOT, null, ymsOperationType);
-    // }
-
     /**
      * The listener class acts as the event producer for the event queues. The
      * queues are created by the event consumer threads and are removed when the
      * threads terminate.
      */
     // private class InternalYangNotificationListener implements YangNotificationListener {
-
     //     @Override
     //     public void event(YangNotificationEvent event) {
-    //         if (event.type() != YangNotificationEvent.Type.YANG_NOTIFICATION) {
-    //             // For now, we only handle YANG notification events.
-    //             return;
-    //         }
-
-    //         if (eventQueueList.isEmpty()) {
-    //             /*
-    //              * There is no consumer waiting to consume, so don't have to
-    //              * produce this event.
-    //              */
-    //             log.debug("Q list is empty");
-    //             return;
-    //         }
-
-    //         // try {
-    //         //     YdtContext ydtNode = event.subject().getNotificationRootContext();
-    //         //     ObjectNode jsonNode = convertYdtToJson(getJsonNameFromYdtNode(ydtNode),
-    //         //                                            ydtNode,
-    //         //                                            ymsService.getYdtWalker());
-    //         //     /*
-    //         //      * Put the event to every queue out there. Each queue is
-    //         //      * corresponding to an event stream session. The queue is
-    //         //      * removed when the session terminates.
-    //         //      */
-    //         //     for (Entry<String, BlockingQueue<ObjectNode>> entry : eventQueueList
-    //         //             .entrySet()) {
-    //         //         entry.getValue().put(jsonNode);
-    //         //     }
-    //         // } catch (InterruptedException e) {
-    //         //     log.error("Failed to put event in queue: {}", e.getMessage());
-    //         //     log.debug("Exception trace in InternalYangNotificationListener: ", e);
-    //         //     throw new RestconfException("Failed to put event in queue",
-    //         //                                 INTERNAL_SERVER_ERROR);
-    //         // }
-    //     }
     // }
 }
