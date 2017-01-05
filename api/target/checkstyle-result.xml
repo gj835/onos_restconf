@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.11.2">
+<file name="/Users/jingan/onos/apps/restconf/api/src/main/java/org/onosproject/restconf/api/package-info.java">
+</file>
+<file name="/Users/jingan/onos/apps/restconf/api/src/main/java/org/onosproject/restconf/api/Patch.java">
+</file>
+<file name="/Users/jingan/onos/apps/restconf/api/src/main/java/org/onosproject/restconf/api/RestconfException.java">
+</file>
+<file name="/Users/jingan/onos/apps/restconf/api/src/main/java/org/onosproject/restconf/api/RestconfService.java">
+</file>
+</checkstyle>
