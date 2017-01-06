@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1483576411296
+Bnd-LastModified: 1483664250439
 Build-Jdk: 1.8.0_73
 Built-By: jingan
 Bundle-Description: RESTCONF Application Module
@@ -7,18 +7,18 @@ Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
 Bundle-ManifestVersion: 2
 Bundle-Name: onos-restconf-restconfmanager
 Bundle-SymbolicName: org.onosproject.onos-restconf-restconfmanager
-Bundle-Version: 1.8.1.SNAPSHOT
+Bundle-Version: 1.9.0.SNAPSHOT
 Created-By: Apache Maven Bundle Plugin
 Export-Package: org.onosproject.restconf.restconfmanager;uses:="com.fast
  erxml.jackson.databind.node,org.glassfish.jersey.server,org.onosproject
- .restconf.api";version="1.8.1"
+ .restconf.api";version="1.9.0"
 Import-Package: 
  com.fasterxml.jackson.databind.node;version="[2.7,3)",
  com.google.common.util.concurrent;version="[19.0,20)",
  javax.ws.rs.core;version="[2.0,3)",
  org.glassfish.jersey.server;version="[2.22,3)",
- org.onosproject.event;version="[1.8,2)",
- org.onosproject.restconf.api;version="[1.8,2)",
+ org.onosproject.event;version="[1.9,2)",
+ org.onosproject.restconf.api;version="[1.9,2)",
  org.slf4j;version="[1.7,2)"
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
 Service-Component: OSGI-INF/org.onosproject.restconf.restconfmanager.Res

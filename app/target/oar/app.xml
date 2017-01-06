@@ -14,11 +14,11 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<app name="org.onosproject.restconf" origin="ON.Lab" version="1.8.1-SNAPSHOT"
+<app name="org.onosproject.restconf" origin="ON.Lab" version="1.9.0-SNAPSHOT"
      category="Utility" url="http://onosproject.org" title="RESTCONF Service Module App"
-     featuresRepo="mvn:org.onosproject/onos-restconf-app/1.8.1-SNAPSHOT/xml/features"
+     featuresRepo="mvn:org.onosproject/onos-restconf-app/1.9.0-SNAPSHOT/xml/features"
      features="onos-restconf-app" >
     <description>RESTCONF Application Module main Application.</description>
-    <artifact>mvn:org.onosproject/onos-restconf-api/1.8.1-SNAPSHOT</artifact>
-    <artifact>mvn:org.onosproject/onos-restconf-restconfmanager/1.8.1-SNAPSHOT</artifact>
+    <artifact>mvn:org.onosproject/onos-restconf-api/1.9.0-SNAPSHOT</artifact>
+    <artifact>mvn:org.onosproject/onos-restconf-restconfmanager/1.9.0-SNAPSHOT</artifact>
 </app>
