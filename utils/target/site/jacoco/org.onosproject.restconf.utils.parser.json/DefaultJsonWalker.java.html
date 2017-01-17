@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultJsonWalker.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">onos-restconf-utils</a> &gt; <a href="index.source.html" class="el_package">org.onosproject.restconf.utils.parser.json</a> &gt; <span class="el_source">DefaultJsonWalker.java</span></div><h1>DefaultJsonWalker.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2016-present Open Networking Laboratory
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.onosproject.restconf.utils.parser.json;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.onosproject.restconf.utils.parser.api.JsonWalker;
+import org.onosproject.restconf.utils.parser.api.JsonListener;
+
+import java.util.Iterator;
+import java.util.Map;
+
+/**
+ * Represents implementation of JSON walk, which walks the JSON object node.
+ */
+<span class="fc" id="L31">public class DefaultJsonWalker implements JsonWalker {</span>
+    @Override
+    public void walk(JsonListener jsonListener, String fieldName,
+                     ObjectNode objectNode) {
+
+        //enter the object node, the original ObjectNode should have a module
+        //name as fieldName.
+<span class="fc" id="L38">        jsonListener.enterJsonNode(fieldName, objectNode);</span>
+        //the node has no children, then exist and return.
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if (!objectNode.isContainerNode()) {</span>
+<span class="nc" id="L41">            jsonListener.exitJsonNode(objectNode);</span>
+<span class="nc" id="L42">            return;</span>
+        }
+
+<span class="fc" id="L45">        Iterator&lt;Map.Entry&lt;String, JsonNode&gt;&gt; fields = objectNode.fields();</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        while (fields.hasNext()) {</span>
+            //get the children entry of the node
+<span class="fc" id="L48">            Map.Entry&lt;String, JsonNode&gt; currentChild = fields.next();</span>
+<span class="fc" id="L49">            String key = currentChild.getKey();</span>
+<span class="fc" id="L50">            JsonNode value = currentChild.getValue();</span>
+            //if the entry's value has its own children, do a recursion.
+            //if the entry has no children, store the key and value.
+            //for we don't know the specific type of the entry's value, we
+            // should give it to a method which can handle JsonNode
+<span class="fc bfc" id="L55" title="All 2 branches covered.">            if (value.isContainerNode()) {</span>
+<span class="fc" id="L56">                walkJsonNode(jsonListener, key, value);</span>
+            } else {
+<span class="fc" id="L58">                jsonListener.enterJsonNode(key, value);</span>
+<span class="fc" id="L59">                jsonListener.exitJsonNode(value);</span>
+            }
+<span class="fc" id="L61">        }</span>
+<span class="fc" id="L62">        jsonListener.exitJsonNode(objectNode);</span>
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * Walks the JSON data tree. This method is called when we don't know
+     * the exact type of a json node.
+     *
+     * @param jsonListener Json listener implemented by the user
+     * @param fieldName    the original object node field
+     * @param rootNode     the json node which needs to be walk
+     */
+    private void walkJsonNode(JsonListener jsonListener, String fieldName,
+                              JsonNode rootNode) {
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (rootNode.isObject()) {</span>
+<span class="fc" id="L76">            walk(jsonListener, fieldName, (ObjectNode) rootNode);</span>
+<span class="fc" id="L77">            return;</span>
+        }
+
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">        if (rootNode.isArray()) {</span>
+<span class="fc" id="L81">            walkArrayNode(jsonListener, fieldName, (ArrayNode) rootNode);</span>
+        }
+<span class="fc" id="L83">    }</span>
+
+    /**
+     * Walks the JSON data tree. This method is called when the user knows the
+     * json node type is ArrayNode.
+     *
+     * @param jsonListener Json listener implemented by the user
+     * @param fieldName    the original object node field
+     * @param rootNode     the json node which needs to be walk
+     */
+    private void walkArrayNode(JsonListener jsonListener, String fieldName,
+                               ArrayNode rootNode) {
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        if (rootNode == null) {</span>
+<span class="nc" id="L96">            return;</span>
+        }
+        //enter the array node.
+<span class="fc" id="L99">        jsonListener.enterJsonNode(fieldName, rootNode);</span>
+<span class="fc" id="L100">        Iterator&lt;JsonNode&gt; children = rootNode.elements();</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        while (children.hasNext()) {</span>
+<span class="fc" id="L102">            JsonNode currentChild = children.next();</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">            if (currentChild.isContainerNode()) {</span>
+<span class="fc" id="L104">                walkJsonNode(jsonListener, null, currentChild);</span>
+            }
+<span class="fc" id="L106">        }</span>
+<span class="fc" id="L107">        jsonListener.exitJsonNode(rootNode);</span>
+<span class="fc" id="L108">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
