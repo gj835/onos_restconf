@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// package org.onosproject.protocol.restconf.server.restconfmanager;
 package org.onosproject.restconf.restconfmanager;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -21,8 +20,6 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Deactivate;
-// import org.apache.felix.scr.annotations.Reference;
-// import org.apache.felix.scr.annotations.ReferenceCardinality;
 import org.apache.felix.scr.annotations.Service;
 import org.glassfish.jersey.server.ChunkedOutput;
 import org.onosproject.event.ListenerTracker;
@@ -32,7 +29,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-// import java.util.Map.Entry;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -68,8 +64,7 @@ import static javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
  * So the component is not activated until a RESTCONF request is received by
  * the RESTCONF Protocol Proxy (RPP) module, which consumes the service.
  */
-// @Component(immediate = false)
-@Component(immediate = true)
+@Component(immediate = false)
 @Service
 public class RestconfManager implements RestconfService {
 
@@ -102,7 +97,6 @@ public class RestconfManager implements RestconfService {
 
     @Deactivate
     protected void deactivate() {
-        // listeners.removeListeners();
         shutdownAndAwaitTermination(workerThreadPool);
         log.info("Stopped");
     }
@@ -110,8 +104,8 @@ public class RestconfManager implements RestconfService {
     @Override
     public ObjectNode runGetOperationOnDataResource(String uri)
             throws RestconfException {
-
-        return null;
+        ObjectNode result = null;
+        return result;
     }
 
     @Override
@@ -122,13 +116,6 @@ public class RestconfManager implements RestconfService {
     @Override
     public void runPutOperationOnDataResource(String uri, ObjectNode rootNode)
             throws RestconfException {
-        // YmsOperationExecutionStatus status =
-        //         invokeYmsOp(uri, rootNode, REPLACE);
-
-        // if (status != EXECUTION_SUCCESS) {
-        //     throw new RestconfException("YMS put operation failed.",
-        //                                 INTERNAL_SERVER_ERROR);
-        // }
     }
 
     @Override
